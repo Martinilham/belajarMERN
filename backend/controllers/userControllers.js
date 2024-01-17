@@ -1,6 +1,6 @@
-import User from "../models/usermodel";
+import User from "../models/usermodel.js";
 
-export const getUsers = async (req,res) => {
+export const getUser = async (req,res) => {
     try{
         const users = await User.find()
         res.json(users);
@@ -9,8 +9,17 @@ export const getUsers = async (req,res) => {
     }
 }  
 
+export const getUserById = async (req,res) => {
+    try{
+        const userById = await User.findById({_id:req.params.id})
+        res.json(userById);
+    }catch(error){
+        res.status(404).json({message:error.message})
+    }
+}  
+
 export const saveUser = async (req,res) => {
-    const user = new User(req.body)
+    const user = new User()
     try{
         const insertUser = await user.save()
         res.status(201).json(insertUser)

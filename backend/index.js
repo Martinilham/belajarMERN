@@ -1,8 +1,10 @@
-const mongoose = require('mongoose')
-const express = require('express')
-const { ServerApiVersion } = require('mongodb');
+import mongoose from 'mongoose'
+import express from 'express'
+import { ServerApiVersion } from 'mongodb'
+import UserRoute from './routes/userRoute.js'
+import cors from "cors"
 
-const url = "mongodb+srv://martinilham15:2Azct32sNLJqNgj2@myserver.aw1tteh.mongodb.net/databarang?retryWrites=true&w=majority";
+const url = "mongodb+srv://martinilham15:2Azct32sNLJqNgj2@myserver.aw1tteh.mongodb.net/myfirstdata?retryWrites=true&w=majority";
 const port = 5000
 
 const app = express()
@@ -17,5 +19,9 @@ mongoose.connect(url, {
 const db = mongoose.connection;
 db.on('error', (error)=>(console.log(error)));
 db.once('open',()=>(console.log("databases connected")))
+
+app.use(cors());
+app.use(express.json());
+app.use(UserRoute);
 
 app.listen(port,()=>console.log(`web berjalan di port ${port}`))
