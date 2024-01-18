@@ -1,5 +1,5 @@
 import react, { useEffect, useState } from 'react'
-
+import axios from 'axios'
 
 
 const UserList = ()=>{
@@ -12,6 +12,14 @@ const UserList = ()=>{
     const getUser = async ()=>{
         const response = axios.get("http://localhost:5000/users")
         setUser(response.data)
+    }
+
+    const deleteUser = async(id)=>{
+        try{
+            await axios.delete(`http://localhost:5000/users/${id}`)
+        }catch(error){
+            console.log(error)
+        }
     }
 
     return(
