@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const AddUser = () => {
-  const [name, setName] = useState("");
+  const [nama, setName] = useState("");
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("Male");
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const AddUser = () => {
     e.preventDefault();
     try {
       await axios.post("http://localhost:5000/users", {
-        name,
+        nama,
         email,
         gender,
       });
@@ -32,7 +32,7 @@ const AddUser = () => {
               <input
                 type="text"
                 className="input"
-                value={name}
+                value={nama}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Name"
               />
