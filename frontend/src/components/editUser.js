@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 const EditUser = () => {
-  const [name, setName] = useState("");
+  const [nama, setName] = useState("");
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("Male");
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const EditUser = () => {
 
   const getUserById = async () => {
     const response = await axios.get(`http://localhost:5000/users/${id}`);
-    setName(response.data.name);
+    setName(response.data.nama);
     setEmail(response.data.email);
     setGender(response.data.gender);
   };
@@ -24,7 +24,7 @@ const EditUser = () => {
     e.preventDefault();
     try {
       await axios.patch(`http://localhost:5000/users/${id}`, {
-        name,
+        nama,
         email,
         gender,
       });
@@ -44,7 +44,7 @@ const EditUser = () => {
               <input
                 type="text"
                 className="input"
-                value={name}
+                value={nama}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Name"
               />

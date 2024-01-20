@@ -43,7 +43,7 @@ const UserList = () => {
             {users.map((user, index) => (
               <tr key={user._id}>
                 <td>{index + 1}</td>
-                <td>{user.name}</td>
+                <td>{user.nama}</td>
                 <td>{user.email}</td>
                 <td>{user.gender}</td>
                 <td>
