@@ -1,30 +1,30 @@
-import react, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
+const UserList = () => {
+  const [users, setUser] = useState([]);
 
-const UserList = ()=>{
-    const [users,setUser] = useState([])
+  useEffect(() => {
+    getUsers();
+  }, []);
 
-    useEffect(()=>{
-        getUser()
-    },[])
+  const getUsers = async () => {
+    const response = await axios.get("http://localhost:5000/users");
+    setUser(response.data);
+  };
 
-    const getUser = async ()=>{
-        const response = axios.get("http://localhost:5000/users")
-        setUser(response.data)
+  const deleteUser = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/users/${id}`);
+      getUsers();
+    } catch (error) {
+      console.log(error);
     }
+  };
 
-    const deleteUser = async(id)=>{
-        try{
-            await axios.delete(`http://localhost:5000/users/${id}`)
-        }catch(error){
-            console.log(error)
-        }
-    }
-
-    return(
-        <>
-        <div className="columns mt-5">
+  return (
+    <div className="columns mt-5">
       <div className="column is-half">
         <Link to="add" className="button is-success">
           Add New
@@ -66,8 +66,7 @@ const UserList = ()=>{
         </table>
       </div>
     </div>
-        </>
-    )
-}
+  );
+};
 
 export default UserList;
